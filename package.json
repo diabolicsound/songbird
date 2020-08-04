@@ -1,41 +1,37 @@
 {
   "name": "songbird",
   "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
+  "description": "songbird task for RSS",
+  "main": "index.js",
   "scripts": {
-    "eslint": "eslint ./src --max-warnings=0 --cache --cache-location \"./.cache/\"",
-    "build": "webpack",
-    "start:dev": "webpack-dev-server"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/diabolicsound/songbird.git"
   },
-  "author": "",
+  "author": "Artsemi Shareika",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/diabolicsound/songbird/issues"
   },
   "homepage": "https://github.com/diabolicsound/songbird#readme",
-  "dependencies": {
-    "bootstrap": "^4.4.1"
-  },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "babel-eslint": "^10.1.0",
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "css-loader": "^3.5.2",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2",
-    "file-loader": "^6.0.0",
-    "html-webpack-plugin": "^4.2.0",
-    "mini-css-extract-plugin": "^0.9.0",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "css-loader": "^4.2.0",
+    "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
