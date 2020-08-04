@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-audio-player": "^0.13.0",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1"
   }
 }
