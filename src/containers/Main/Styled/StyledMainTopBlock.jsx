@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ReactAudioPlayer from 'react-audio-player';
 import React from 'react';
+import shuffleArray from '../../../utils/shuffleArray';
 
 const StyledMainTopBlock = styled.div`
 display: flex;
@@ -11,12 +12,14 @@ justify-content: space-between;
 const BirdImage = styled.img`
 `;
 
-const MainBlockTop = () => {
+const MainBlockTop = (props) => {
+const { sound, image } = props;
+
     return (
         <StyledMainTopBlock>
-<BirdImage src='https://live.staticflickr.com/5202/5252413926_8e013a3efd.jpg' />
+<BirdImage src={'https://live.staticflickr.com/5202/5252413926_8e013a3efd.jpg'} />
 <ReactAudioPlayer 
-                src='https://www.xeno-canto.org/sounds/uploaded/OOECIWCSWV/XC449827-LS100829%20King%20Penguin%20call%20A.mp3'
+                src={sound}
                 autoPlay
                 controls
                 />
