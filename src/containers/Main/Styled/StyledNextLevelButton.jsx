@@ -8,9 +8,9 @@ height: 30px;
 `;
 
 const NextLevelButton = (props) => {
-    const {func} = props;
+    const {func, isDisabled} = props;
     return (
-        <StyledNextLevelButton onClick={func}/>
+        <StyledNextLevelButton onClick={func} disabled={isDisabled} data-button-index={'button'}/>
     )
 }
 
