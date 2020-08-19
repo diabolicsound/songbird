@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from "react-dom"
 import MainBlockTop from '../../containers/Main/Styled/StyledMainTopBlock';
 import MainBlockBottom from '../../containers/Main/Styled/StyledMainBottomBlock';
 import NextLevelButton from '../../containers/Main/Styled/StyledNextLevelButton';
@@ -7,7 +8,6 @@ import shuffleArray from '../../utils/shuffleArray';
 
 const Main = () => {
     const [level, changeLevel] = useState(0);
-    console.log(shuffleArray(birdsData[0]));
 
     const numChange = () => {
         changeLevel(level + 1);
