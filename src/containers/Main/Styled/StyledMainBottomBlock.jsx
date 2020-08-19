@@ -10,34 +10,35 @@ justify-content: space-between;
 `;
 
 const GameListContainer = (props) => {
-    const { currentLevel } = props;
+    const [currentBirdForDescription, changeCurrentBird] = useState('');
+    const [birdDescription, changeCurrentBirdDescription] = useState('');
+    const [birdLatinaName, changeCurrentBirdLatina] = useState('');
+    const { currentLevel, wordCollection } = props;
 
     const BirdsDescriptionContainer = () => {
     return (
-      <div><h2>Bird Name</h2>
-      <p>Bird Latina</p>
-      <p>Bird Description</p>
+      <div><h2>{currentBirdForDescription}</h2>
+      <p>{birdLatinaName}</p>
+    <p>{birdDescription}</p>
       </div>
     )
     }
 
-    const selectedBird = shuffleArray(birdsData[currentLevel]);
-
     const eventHandler = (event) => {
-      console.log(event.target.dataset.wordNumber);
-      console.log(selectedBird[0].id);
-      if (selectedBird[0].id === +event.target.dataset.wordNumber) {
+      console.log(event.target);
+      changeCurrentBird(event.target.textContent)
+      changeCurrentBirdDescription(event.target.dataset.wordObject)
+      changeCurrentBirdLatina(event.target.dataset.wordLatina)
+      if (wordCollection[0].id === +event.target.dataset.wordNumber) {
         console.log('DA')
       }
     }
 
     const GameList = birdsData[currentLevel].map((word, index) => {
         return (
-          <div key={word.name}>
-            <p data-word-number={word.id} onClick={eventHandler}>
+            <p  key={word.name} data-word-object={word.description} data-word-latina={word.species} data-word-number={word.id} onClick={eventHandler}>
               {word.name}
             </p>
-          </div>
         );
       });
     
@@ -47,9 +48,10 @@ const GameListContainer = (props) => {
 
 const MainBlockBottom = (props) => {
     const { currentLevel } = props;
+    const shuffledCollection = shuffleArray(birdsData[currentLevel])
     return (
         <StyledMainBottomBlock>
-            <GameListContainer currentLevel={currentLevel}/>
+            <GameListContainer currentLevel={currentLevel} wordCollection={shuffledCollection}/>
         </StyledMainBottomBlock>
     )
 }
