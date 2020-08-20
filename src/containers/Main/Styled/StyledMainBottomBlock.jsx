@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import birdsData from '../../../components/birdsData';
 import shuffleArray from '../../../utils/shuffleArray';
 import NextLevelButton from '../Styled/StyledNextLevelButton';
+import MainBlockTop from '../Styled/StyledMainTopBlock';
 
 const StyledMainBottomBlock = styled.div`
 display: flex;
@@ -20,66 +21,44 @@ li:before {
 }
 `;
 
+const StyledUL = styled.ul``;
+
 
 const GameListContainer = (props) => {
-    const [currentBirdForDescription, changeCurrentBird] = useState('Послушайте плеер!');
-    const [birdDescription, changeCurrentBirdDescription] = useState('Выберите птицу из списка.');
-    const [birdLatinaName, changeCurrentBirdLatina] = useState('');
-    const [rightAnswer, changeAnswer] = useState(true);
-    const [currentLevel, changeLevel] = useState(0);
-
-    const {currentWordCollection} = props;
-
-
-    const numChange = (event) => {
-      changeLevel(currentLevel + 1);
-      console.log(currentLevel);
-      if (event.target.dataset.buttonIndex === 'button') {
-        changeAnswer(true);
-        changeCurrentBird('Послушай Плеер')
-      changeCurrentBirdDescription('Выберите птицу из списка.')
-      changeCurrentBirdLatina('');
-      }
-  }
+    const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription, disabledButton, 
+      level } = props;
 
     const BirdsDescriptionContainer = (props) => {
     return (
-      <div><h2>{currentBirdForDescription}</h2>
-      <p>{birdLatinaName}</p>
+      <div><h2>{currentBirdName}</h2>
+      <p>{birdNameTranslate}</p>
     <p>{birdDescription}</p>
       </div>
     )
     }
 
-    const eventHandler = (event) => {
-      changeCurrentBird(event.target.textContent)
-      changeCurrentBirdDescription(event.target.dataset.wordObject)
-      changeCurrentBirdLatina(event.target.dataset.wordLatina)
-      if (currentWordCollection[0].id === +event.target.dataset.wordNumber) {
-        console.log('DA');
-        changeAnswer(false);
-      }
-    }
-
-    const GameList = birdsData[currentLevel].map((word, index) => {
+    const GameList = birdsData[level].map((word, index) => {
         return (
-            <li key={word.name} data-word-object={word.description} data-word-latina={word.species} data-word-number={word.id} onClick={eventHandler}>
+            <li key={word.name} data-word-object={word.description} data-word-latina={word.species} data-word-number={word.id} >
               {word.name}
             </li>
         );
       });
     
-      return <div><ul >{GameList}</ul>
+      return <div><StyledUL onClick={func}>{GameList}</StyledUL>
       <BirdsDescriptionContainer />
-      <NextLevelButton func={numChange} isDisabled={rightAnswer}/>
+      <NextLevelButton func={numChangeFunc} isDisabled={disabledButton}/>
       </div>;
     }
 
 const MainBlockBottom = (props) => {
-    const { /*currentLevel, */ currentWordCollection } = props;
+  const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription,  
+    level, wordsCollection, disabledButton } = props;
     return (
         <StyledMainBottomBlock>
-            <GameListContainer currentWordCollection={currentWordCollection}/>
+            <GameListContainer func={func} numChangeFunc={numChangeFunc} currentBirdName={currentBirdName}
+            birdNameTranslate={birdNameTranslate} birdDescription={birdDescription} disabledButton={disabledButton}
+            wordsCollection={wordsCollection} level={level}/>
         </StyledMainBottomBlock>
     )
 }
