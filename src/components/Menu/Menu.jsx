@@ -1,16 +1,30 @@
 import React from 'react';
 import StyledMenu from './Styled/MenuStyled';
+import birdsArr from '../../utils/menuList';
 
-const Menu = () => {
+
+
+const Menu = (props) => {
+    const { level } = props;
+    const MenuList = birdsArr.map((name, index) => {
+        if (index === level) {
+        return (
+            <li key={name} className={'activeList'}>
+              {name}
+            </li>
+        );
+        }
+        return (
+            <li key={name}>
+              {name}
+            </li>
+        );
+      });
+
     return (
         <div>
             <StyledMenu>
-                <li>Разминка</li>
-                <li>Воробьиные</li>
-                <li>Лесные птицы</li>
-                <li>Певчие птицы</li>
-                <li>Хищные птицы</li>
-                <li>Морские птицы</li>
+               {MenuList}
             </StyledMenu>
             </div>
     )
