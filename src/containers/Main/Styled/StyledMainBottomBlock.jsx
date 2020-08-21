@@ -30,6 +30,15 @@ const GameListContainer = (props) => {
       level, currentBirdImage, currentBirdAudio } = props;
 
     const BirdsDescriptionContainer = () => {
+      if (!currentBirdAudio) {
+        return (
+          <div><h2>{currentBirdName}</h2>
+          <img src={currentBirdImage} />
+          <p>{birdNameTranslate}</p>
+        <p>{birdDescription}</p>
+          </div>
+        )
+      }
     return (
       <div><h2>{currentBirdName}</h2>
       <img src={currentBirdImage} />
