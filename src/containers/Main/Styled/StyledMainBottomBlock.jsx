@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React, { useState } from 'react';
+import ReactAudioPlayer from 'react-audio-player';
 import birdsData from '../../../components/birdsData';
 import shuffleArray from '../../../utils/shuffleArray';
 import NextLevelButton from '../Styled/StyledNextLevelButton';
@@ -26,11 +27,16 @@ const StyledUL = styled.ul``;
 
 const GameListContainer = (props) => {
     const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription, disabledButton, 
-      level } = props;
+      level, currentBirdImage, currentBirdAudio } = props;
 
-    const BirdsDescriptionContainer = (props) => {
+    const BirdsDescriptionContainer = () => {
     return (
       <div><h2>{currentBirdName}</h2>
+      <img src={currentBirdImage} />
+      <ReactAudioPlayer 
+                src={currentBirdAudio}
+                controls
+                />
       <p>{birdNameTranslate}</p>
     <p>{birdDescription}</p>
       </div>
@@ -39,7 +45,8 @@ const GameListContainer = (props) => {
 
     const GameList = birdsData[level].map((word, index) => {
         return (
-            <li key={word.name} data-word-object={word.description} data-word-latina={word.species} data-word-number={word.id} >
+            <li key={word.name} data-word-object={word.description} data-word-latina={word.species} 
+            data-word-number={word.id} data-word-image={word.image} data-word-audio={word.audio}>
               {word.name}
             </li>
         );
@@ -53,12 +60,12 @@ const GameListContainer = (props) => {
 
 const MainBlockBottom = (props) => {
   const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription,  
-    level, wordsCollection, disabledButton } = props;
+    level, wordsCollection, disabledButton, currentBirdImage, currentBirdAudio } = props;
     return (
         <StyledMainBottomBlock>
             <GameListContainer func={func} numChangeFunc={numChangeFunc} currentBirdName={currentBirdName}
             birdNameTranslate={birdNameTranslate} birdDescription={birdDescription} disabledButton={disabledButton}
-            wordsCollection={wordsCollection} level={level}/>
+            wordsCollection={wordsCollection} level={level} currentBirdImage={currentBirdImage} currentBirdAudio={currentBirdAudio}/>
         </StyledMainBottomBlock>
     )
 }

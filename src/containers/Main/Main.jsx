@@ -8,14 +8,14 @@ import shuffleArray from '../../utils/shuffleArray';
 
 const Main = (props) => {
   const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription, disabledButton, 
-    level, wordCollection } = props;
+    level, wordCollection, currentBirdImage, currentBirdAudio } = props;
     return (
         <div>
-        <MainBlockTop sound={wordCollection[0].audio} />
+        <MainBlockTop sound={wordCollection[0].audio} image={wordCollection[0].image} />
         <MainBlockBottom numChangeFunc={numChangeFunc} func={func}
         currentBirdName={currentBirdName}
         birdNameTranslate={birdNameTranslate} birdDescription={birdDescription} disabledButton={disabledButton}
-        wordCollection={wordCollection}
+        wordCollection={wordCollection} currentBirdImage={currentBirdImage} currentBirdAudio={currentBirdAudio}
         level={level}/>
         </div>
     )

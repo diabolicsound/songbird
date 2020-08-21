@@ -10,6 +10,8 @@ justify-content: space-between;
 `;
 
 const BirdImage = styled.img`
+width: 400px;
+height: 300px;
 `;
 
 const MainBlockTop = (props) => {
@@ -17,7 +19,7 @@ const { sound, image } = props;
 
     return (
         <StyledMainTopBlock>
-<BirdImage src={'https://live.staticflickr.com/5202/5252413926_8e013a3efd.jpg'} />
+<BirdImage src={image} />
 <ReactAudioPlayer 
                 src={sound}
                 autoPlay

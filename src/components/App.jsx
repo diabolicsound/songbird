@@ -8,15 +8,19 @@ function App() {
   const [currentBirdForDescription, changeCurrentBird] = useState('Послушайте плеер!');
   const [birdDescription, changeCurrentBirdDescription] = useState('Выберите птицу из списка.');
   const [birdLatinaName, changeCurrentBirdLatina] = useState('');
+  const [birdImage, changeBirdImage] = useState('');
+  const [birdAudio, changeBirdAudio] = useState('');
   const [rightAnswer, changeAnswer] = useState(true);
   const [currentLevel, changeLevel] = useState(0);
 
   const shuffledCollection = birdsData[currentLevel];
 
     const eventHandler = (event) => {
-        changeCurrentBird(event.target.textContent)
-        changeCurrentBirdDescription(event.target.dataset.wordObject)
-        changeCurrentBirdLatina(event.target.dataset.wordLatina)
+        changeCurrentBird(event.target.textContent);
+        changeCurrentBirdDescription(event.target.dataset.wordObject);
+        changeCurrentBirdLatina(event.target.dataset.wordLatina);
+        changeBirdImage(event.target.dataset.wordImage);
+        changeBirdAudio(event.target.dataset.wordAudio);
         if (shuffledCollection[0].id === +event.target.dataset.wordNumber) {
           console.log('DA');
           changeAnswer(false); 
@@ -31,6 +35,8 @@ function App() {
             changeCurrentBird('Послушай Плеер')
             changeCurrentBirdDescription('Выберите птицу из списка.')
             changeCurrentBirdLatina('');
+            changeBirdImage('');
+            changeBirdAudio('');
             }
         }
 
@@ -41,7 +47,7 @@ function App() {
         currentBirdName={currentBirdForDescription}
         birdNameTranslate={birdLatinaName} birdDescription={birdDescription} disabledButton={rightAnswer}
         wordCollection={shuffledCollection}
-        level={currentLevel}/>
+        level={currentLevel} currentBirdImage={birdImage} currentBirdAudio={birdAudio}/>
             </div>
         );
     }
