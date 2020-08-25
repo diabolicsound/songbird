@@ -20,14 +20,24 @@ li:before {
   content: "•";
   padding-right: 10px;
 }
+
+.already-clicked {
+  color: red;
+}
+
+.clicked-right {
+  color: green;
+}
 `;
 
 const StyledUL = styled.ul``;
 
+let classForList;
+let rightClassForList;
 
 const GameListContainer = (props) => {
     const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription, disabledButton, 
-      level, currentBirdImage, currentBirdAudio } = props;
+      level, currentBirdImage, currentBirdAudio, rightClass, rightAnswer, mistakeClass, answerName, allAnswers } = props;      
 
     const BirdsDescriptionContainer = () => {
       if (!currentBirdAudio) {
@@ -53,8 +63,19 @@ const GameListContainer = (props) => {
     }
 
     const GameList = birdsData[level].map((word, index) => {
+      if ((word.name === answerName || allAnswers.includes(word.name)) && disabledButton) {
+        classForList = mistakeClass;
+      }
+
+      else {
+        classForList = '';
+      }
+
+      if (word.name === rightAnswer) {
+        classForList = rightClass;
+      }
         return (
-            <li key={word.name} data-word-object={word.description} data-word-latina={word.species} 
+            <li className={classForList} key={word.name} data-word-object={word.description} data-word-latina={word.species} 
             data-word-number={word.id} data-word-image={word.image} data-word-audio={word.audio}>
               {word.name}
             </li>
@@ -69,12 +90,15 @@ const GameListContainer = (props) => {
 
 const MainBlockBottom = (props) => {
   const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription,  
-    level, wordsCollection, disabledButton, currentBirdImage, currentBirdAudio } = props;
+    level, wordsCollection, disabledButton, currentBirdImage,
+     currentBirdAudio, mistakeClass,rightClass, answerName, allAnswers, rightAnswer } = props;
     return (
         <StyledMainBottomBlock>
             <GameListContainer func={func} numChangeFunc={numChangeFunc} currentBirdName={currentBirdName}
             birdNameTranslate={birdNameTranslate} birdDescription={birdDescription} disabledButton={disabledButton}
-            wordsCollection={wordsCollection} level={level} currentBirdImage={currentBirdImage} currentBirdAudio={currentBirdAudio}/>
+            wordsCollection={wordsCollection} level={level} currentBirdImage={currentBirdImage}
+            mistakeClass={mistakeClass} rightClass={rightClass} currentBirdAudio={currentBirdAudio} answerName={answerName}
+            allAnswers={allAnswers} rightAnswer={rightAnswer}/>
         </StyledMainBottomBlock>
     )
 }

@@ -3,6 +3,10 @@ import Header from '../containers/Header/Header';
 import Main from '../containers/Main/Main';
 import birdsData from '../components/birdsData';
 import '../styles/App.css';
+import ModalWindow from '../containers/Main/Styled/StyledModalWindow';
+import useSound from 'use-sound';
+import correct from '../utils/audio/correct.mp3';
+import error from '../utils/audio/error.mp3'
 
 function App() {
   const [currentBirdForDescription, changeCurrentBird] = useState('Послушайте плеер!');
@@ -10,44 +14,68 @@ function App() {
   const [birdLatinaName, changeCurrentBirdLatina] = useState('');
   const [birdImage, changeBirdImage] = useState('');
   const [birdAudio, changeBirdAudio] = useState('');
-  const [rightAnswer, changeAnswer] = useState(true);
+  const [rightAnswerGiven, changeAnswer] = useState(true);
   const [currentLevel, changeLevel] = useState(0);
+  const [scoreForLevel, changeScoreForLevel] = useState(5);
+  const [totalScore, changeTotalScore] = useState(0);
+  const [mistakeClass, changeMistakeClass] = useState('');
+  const [rightClass, changeRightClass] = useState('');
+  const [clickedAnswer, changeClickedAnswer] = useState('');
+  const [allAnswers, changeAllAnswers] = useState([]);
 
   const shuffledCollection = birdsData[currentLevel];
 
     const eventHandler = (event) => {
+      changeClickedAnswer(event.target.textContent);
+      if (shuffledCollection[0].id != +event.target.dataset.wordNumber && rightAnswerGiven && !allAnswers.includes(clickedAnswer)) {
+      changeMistakeClass('already-clicked');
+      changeScoreForLevel(scoreForLevel - 1);
+      console.log('cuckold');
+      console.log(allAnswers)
+      }
+      if (!allAnswers.includes(clickedAnswer)) {
+        changeAllAnswers([...allAnswers, clickedAnswer])
+        }
         changeCurrentBird(event.target.textContent);
         changeCurrentBirdDescription(event.target.dataset.wordObject);
         changeCurrentBirdLatina(event.target.dataset.wordLatina);
         changeBirdImage(event.target.dataset.wordImage);
         changeBirdAudio(event.target.dataset.wordAudio);
-        if (shuffledCollection[0].id === +event.target.dataset.wordNumber) {
+        if (shuffledCollection[0].id === +event.target.dataset.wordNumber && rightAnswerGiven) {
+          changeTotalScore(totalScore + scoreForLevel)
           console.log('DA');
+          changeRightClass('clicked-right');
           changeAnswer(false); 
         }
       }
     
         const numChange = (event) => {
             changeLevel(currentLevel + 1);
-            console.log(currentLevel);
             if (event.target.dataset.buttonIndex === 'button') {
+            changeRightClass('');
             changeAnswer(true);
             changeCurrentBird('Послушай Плеер')
             changeCurrentBirdDescription('Выберите птицу из списка.')
             changeCurrentBirdLatina('');
             changeBirdImage('');
             changeBirdAudio('');
+            changeScoreForLevel(5);
             }
+        }
+
+        const reset = () => {
+          changeLevel(0);
         }
 
         return (
             <div>
-                <Header level={currentLevel}/>
-                <Main numChangeFunc={numChange} func={eventHandler}
+                {currentLevel <= 5 ? <Header level={currentLevel}/> : <ModalWindow resetFunc={reset} points={totalScore}/>}
+                {currentLevel <= 5 ? <Main numChangeFunc={numChange} func={eventHandler}
         currentBirdName={currentBirdForDescription}
-        birdNameTranslate={birdLatinaName} birdDescription={birdDescription} disabledButton={rightAnswer}
+        birdNameTranslate={birdLatinaName} birdDescription={birdDescription} disabledButton={rightAnswerGiven}
         wordCollection={shuffledCollection}
-        level={currentLevel} currentBirdImage={birdImage} currentBirdAudio={birdAudio}/>
+        level={currentLevel} currentBirdImage={birdImage} currentBirdAudio={birdAudio}
+        mistakeClass={mistakeClass} rightAnswer={shuffledCollection[0].name} rightClass={rightClass} answerName={clickedAnswer} allAnswers={allAnswers}/> : <ModalWindow />}
             </div>
         );
     }

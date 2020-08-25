@@ -17,7 +17,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
-      }
+      },
+      {
+        test: /\.mp3$/,
+        exclude: /node_modules/,
+        use: ["file-loader"]
+    }
     ]
   },
   resolve: {
