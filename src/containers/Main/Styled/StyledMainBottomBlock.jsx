@@ -7,16 +7,26 @@ import NextLevelButton from '../Styled/StyledNextLevelButton';
 import MainBlockTop from '../Styled/StyledMainTopBlock';
 
 const StyledMainBottomBlock = styled.div`
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+color: white;
+width: 100%;
+padding-top: 20px;
+
+ul {
+  font-size: 32px;
+  font-family: Helvetica, sans-serif;
+  color:white;
+  width: 475px;
+  background-color: rgba( 1, 0, 0, 0.5);
+  border-radius: 10px;
+}
 
 li {
   list-style-type: none;
+  margin-bottom: 15px;
 }
 
 li:before {
-  color: black;
+  color: white;
   content: "•";
   padding-right: 10px;
 }
@@ -27,6 +37,27 @@ li:before {
 
 .clicked-right {
   color: green;
+}
+
+.answer-block {
+  width: inherit;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.answer-block div {
+  background-color: rgba( 1,0,0,0.6);
+  border-radius: 10px;
+}
+
+.bird-description {
+  width: 500px;
+}
+
+img {
+  width: 200px;
 }
 `;
 
@@ -45,7 +76,7 @@ const GameListContainer = (props) => {
           <div><h2>{currentBirdName}</h2>
           <img src={currentBirdImage} />
           <p>{birdNameTranslate}</p>
-        <p>{birdDescription}</p>
+        <p className={'bird-description'}>{birdDescription}</p>
           </div>
         )
       }
@@ -57,7 +88,7 @@ const GameListContainer = (props) => {
                 controls
                 />
       <p>{birdNameTranslate}</p>
-    <p>{birdDescription}</p>
+    <p className={'bird-description'}>{birdDescription}</p>
       </div>
     )
     }
@@ -75,16 +106,15 @@ const GameListContainer = (props) => {
         classForList = rightClass;
       }
         return (
-            <li className={classForList} key={word.name} data-word-object={word.description} data-word-latina={word.species} 
+            <li onClick={func} className={classForList} key={word.name} data-word-object={word.description} data-word-latina={word.species} 
             data-word-number={word.id} data-word-image={word.image} data-word-audio={word.audio}>
               {word.name}
             </li>
         );
       });
     
-      return <div><StyledUL onClick={func}>{GameList}</StyledUL>
+      return <div className={'answer-block'}><StyledUL>{GameList}</StyledUL>
       <BirdsDescriptionContainer />
-      <NextLevelButton func={numChangeFunc} isDisabled={disabledButton}/>
       </div>;
     }
 
@@ -99,6 +129,7 @@ const MainBlockBottom = (props) => {
             wordsCollection={wordsCollection} level={level} currentBirdImage={currentBirdImage}
             mistakeClass={mistakeClass} rightClass={rightClass} currentBirdAudio={currentBirdAudio} answerName={answerName}
             allAnswers={allAnswers} rightAnswer={rightAnswer}/>
+             <NextLevelButton func={numChangeFunc} isDisabled={disabledButton}/>
         </StyledMainBottomBlock>
     )
 }

@@ -3,10 +3,10 @@ import Title from '../../components/Title/Title'
 import Menu from '../../components/Menu/Menu';
 
 const Header = (props) => {
-    const { level } = props;
+    const { level, scoreInPoints } = props;
     return (
         <div>
-            <Title />
+            <Title scoreInPoints={scoreInPoints}/>
             <Menu level={level}/>
             </div>
     )

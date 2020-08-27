@@ -6,7 +6,8 @@ import '../styles/App.css';
 import ModalWindow from '../containers/Main/Styled/StyledModalWindow';
 import useSound from 'use-sound';
 import correct from '../utils/audio/correct.mp3';
-import error from '../utils/audio/error.mp3'
+import error from '../utils/audio/error.mp3';
+import bird from '../utils/img/bird.jpg'
 
 function App() {
   const [currentBirdForDescription, changeCurrentBird] = useState('Послушайте плеер!');
@@ -18,6 +19,7 @@ function App() {
   const [currentLevel, changeLevel] = useState(0);
   const [scoreForLevel, changeScoreForLevel] = useState(5);
   const [totalScore, changeTotalScore] = useState(0);
+  const [birdPicture, changeBirdPicture] = useState(bird);
   const [mistakeClass, changeMistakeClass] = useState('');
   const [rightClass, changeRightClass] = useState('');
   const [clickedAnswer, changeClickedAnswer] = useState('');
@@ -27,14 +29,16 @@ function App() {
 
     const eventHandler = (event) => {
       changeClickedAnswer(event.target.textContent);
+      console.log(clickedAnswer);
       if (shuffledCollection[0].id != +event.target.dataset.wordNumber && rightAnswerGiven && !allAnswers.includes(clickedAnswer)) {
       changeMistakeClass('already-clicked');
       changeScoreForLevel(scoreForLevel - 1);
       console.log('cuckold');
-      console.log(allAnswers)
+      changeAllAnswers([...allAnswers, clickedAnswer]);
       }
       if (!allAnswers.includes(clickedAnswer)) {
-        changeAllAnswers([...allAnswers, clickedAnswer])
+        changeAllAnswers([...allAnswers, clickedAnswer]);
+        //console.log(allAnswers);
         }
         changeCurrentBird(event.target.textContent);
         changeCurrentBirdDescription(event.target.dataset.wordObject);
@@ -42,7 +46,8 @@ function App() {
         changeBirdImage(event.target.dataset.wordImage);
         changeBirdAudio(event.target.dataset.wordAudio);
         if (shuffledCollection[0].id === +event.target.dataset.wordNumber && rightAnswerGiven) {
-          changeTotalScore(totalScore + scoreForLevel)
+          changeTotalScore(totalScore + scoreForLevel);
+          changeBirdPicture(shuffledCollection[0].image);
           console.log('DA');
           changeRightClass('clicked-right');
           changeAnswer(false); 
@@ -52,6 +57,8 @@ function App() {
         const numChange = (event) => {
             changeLevel(currentLevel + 1);
             if (event.target.dataset.buttonIndex === 'button') {
+            changeAllAnswers([]);
+            changeBirdPicture(bird);
             changeRightClass('');
             changeAnswer(true);
             changeCurrentBird('Послушай Плеер')
@@ -69,11 +76,11 @@ function App() {
 
         return (
             <div>
-                {currentLevel <= 5 ? <Header level={currentLevel}/> : <ModalWindow resetFunc={reset} points={totalScore}/>}
+                {currentLevel <= 5 ? <Header scoreInPoints={totalScore} level={currentLevel}/> : <ModalWindow resetFunc={reset} points={totalScore}/>}
                 {currentLevel <= 5 ? <Main numChangeFunc={numChange} func={eventHandler}
         currentBirdName={currentBirdForDescription}
         birdNameTranslate={birdLatinaName} birdDescription={birdDescription} disabledButton={rightAnswerGiven}
-        wordCollection={shuffledCollection}
+        wordCollection={shuffledCollection} topBirdPicture={birdPicture}
         level={currentLevel} currentBirdImage={birdImage} currentBirdAudio={birdAudio}
         mistakeClass={mistakeClass} rightAnswer={shuffledCollection[0].name} rightClass={rightClass} answerName={clickedAnswer} allAnswers={allAnswers}/> : <ModalWindow />}
             </div>

@@ -1,11 +1,12 @@
 import React from 'react';
 import StyledTitle from './Styled/TitleStyled';
 
-const Title = () => {
+const Title = (props) => {
+    const {scoreInPoints} = props;
     return (
         <StyledTitle>
             <h1>Songbird</h1>
-            <p>Score</p>
+    <p>Score: {`${scoreInPoints}`}</p>
             </StyledTitle>
     )
 }

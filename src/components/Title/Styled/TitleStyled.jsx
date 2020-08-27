@@ -4,12 +4,14 @@ const StyledTitle = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-around;
+
 h1 {
-color: red;
+    color: white;;
 }
 
 p {
-    color: green;
+    color: white;
+    font-size: 22px;
 }
 `;
 
