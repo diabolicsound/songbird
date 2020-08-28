@@ -9,11 +9,13 @@ import bird from '../../utils/img/bird.jpg'
 
 const Main = (props) => {
   const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription, disabledButton, 
-    level, wordCollection, currentBirdImage, topBirdPicture,
+    level, wordCollection, currentBirdImage, topBirdPicture, randomNumber,
     currentBirdAudio, mistakeClass, answerName, allAnswers, rightClass, rightAnswer  } = props;
+  console.log(wordCollection[randomNumber]);
+
     return (
         <div>
-        <MainBlockTop sound={wordCollection[0].audio} image={topBirdPicture} birdName={answerName} rightAnswerGiven={disabledButton}/>
+        <MainBlockTop sound={wordCollection[randomNumber].audio} image={topBirdPicture} birdName={answerName} rightAnswerGiven={disabledButton}/>
         <MainBlockBottom numChangeFunc={numChangeFunc} func={func}
         currentBirdName={currentBirdName}
         birdNameTranslate={birdNameTranslate} birdDescription={birdDescription} disabledButton={disabledButton}

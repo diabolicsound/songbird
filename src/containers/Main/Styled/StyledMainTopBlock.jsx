@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import ReactAudioPlayer from 'react-audio-player';
 import React from 'react';
-import shuffleArray from '../../../utils/shuffleArray';
 
 const StyledMainTopBlock = styled.div`
  display: flex;
@@ -28,7 +27,6 @@ font-size: 22px;
 
 const MainBlockTop = (props) => {
 const { sound, image, birdName, rightAnswerGiven } = props;
-
     return (
         <StyledMainTopBlock>
 <BirdImage src={image} />
