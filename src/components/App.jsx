@@ -29,7 +29,7 @@ function App() {
   const [birdPicture, changeBirdPicture] = useState(bird);
   const [mistakeClass, changeMistakeClass] = useState('');
   const [rightClass, changeRightClass] = useState('');
-  const [clickedAnswer, changeClickedAnswer] = useState('');
+  const [clickedAnswer, changeClickedAnswer] = useState('lol');
   const [allAnswers, changeAllAnswers] = useState([]);
   const [randomNum, changeNum] = useState(randomNumber);
 
@@ -46,30 +46,25 @@ function App() {
   );
 
     const eventHandler = (event) => {
-      console.log(randomNum);
-      changeClickedAnswer(event.target.textContent);
-      console.log(clickedAnswer);
-      if (shuffledCollection[randomNum].id != +event.target.dataset.wordNumber && rightAnswerGiven && !allAnswers.includes(clickedAnswer)) {
+      if (birdsData[currentLevel][randomNum].id != +event.target.dataset.wordNumber && rightAnswerGiven && !allAnswers.includes(event.target.textContent)) {
       changeMistakeClass('already-clicked');
       changeScoreForLevel(scoreForLevel - 1);
       playWrong();
-      changeAllAnswers([...allAnswers, clickedAnswer]);
+      changeAllAnswers([...allAnswers, event.target.textContent]);
       }
-      if (!allAnswers.includes(clickedAnswer)) {
-        changeAllAnswers([...allAnswers, clickedAnswer]);
-        }
         changeCurrentBird(event.target.textContent);
         changeCurrentBirdDescription(event.target.dataset.wordObject);
         changeCurrentBirdLatina(event.target.dataset.wordLatina);
         changeBirdImage(event.target.dataset.wordImage);
         changeBirdAudio(event.target.dataset.wordAudio);
-        if (shuffledCollection[randomNum].id === +event.target.dataset.wordNumber && rightAnswerGiven) {
+        if (birdsData[currentLevel][randomNum].id === +event.target.dataset.wordNumber && rightAnswerGiven) {
           changeTotalScore(totalScore + scoreForLevel);
-          playRight()
-          changeBirdPicture(shuffledCollection[randomNum].image);
+          playRight();
+          changeBirdPicture(birdsData[currentLevel][randomNum].image);
           console.log('DA');
           changeRightClass('clicked-right');
-          changeAnswer(false); 
+          changeAnswer(false);
+          changeClickedAnswer(event.target.textContent) 
         }
       }
     
@@ -92,17 +87,20 @@ function App() {
 
         const reset = () => {
           changeLevel(0);
+          changeScoreForLevel(5);
+          changeTotalScore(0);
         }
 
         return (
             <div>
-                {currentLevel <= 5 ? <Header scoreInPoints={totalScore} level={currentLevel}/> : <ModalWindow resetFunc={reset} points={totalScore}/>}
+                 <Header scoreInPoints={totalScore} level={currentLevel}/>
                 {currentLevel <= 5 ? <Main numChangeFunc={numChange} func={eventHandler}
         currentBirdName={currentBirdForDescription}
         birdNameTranslate={birdLatinaName} birdDescription={birdDescription} disabledButton={rightAnswerGiven}
-        wordCollection={shuffledCollection} topBirdPicture={birdPicture}
+        wordCollection={birdsData[currentLevel]} topBirdPicture={birdPicture}
         level={currentLevel} currentBirdImage={birdImage} currentBirdAudio={birdAudio}
-        mistakeClass={mistakeClass} randomNumber={randomNum} rightAnswer={shuffledCollection[randomNum].name} rightClass={rightClass} answerName={clickedAnswer} allAnswers={allAnswers}/> : <ModalWindow />}
+        mistakeClass={mistakeClass} randomNumber={randomNum} rightAnswer={birdsData[currentLevel][randomNum].name} rightClass={rightClass}
+         answerName={clickedAnswer} allAnswers={allAnswers}/> : <ModalWindow resetFunc={reset} points={totalScore}/>}
             </div>
         );
     }

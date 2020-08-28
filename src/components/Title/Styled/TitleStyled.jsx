@@ -6,7 +6,7 @@ flex-direction: row;
 justify-content: space-around;
 
 h1 {
-    color: white;;
+    color: white;
 }
 
 p {

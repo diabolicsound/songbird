@@ -18,25 +18,34 @@ ul {
   width: 475px;
   background-color: rgba( 1, 0, 0, 0.5);
   border-radius: 10px;
+  padding-left: 0;
+}
+li:hover {
+  cursor: pointer;
 }
 
 li {
   list-style-type: none;
-  margin-bottom: 15px;
+  line-height: 50px;
+  border: 1px solid black;
 }
 
-li:before {
-  color: white;
-  content: "•";
-  padding-right: 10px;
+span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  margin-right: 15px;
+  margin-bottom: 5px;
 }
 
 .already-clicked {
-  color: red;
+  background-color: red;
 }
 
 .clicked-right {
-  color: green;
+  background-color: green;
 }
 
 .answer-block {
@@ -94,7 +103,7 @@ const GameListContainer = (props) => {
     }
 
     const GameList = birdsData[level].map((word, index) => {
-      if ((word.name === answerName || allAnswers.includes(word.name)) && disabledButton) {
+      if (allAnswers.includes(word.name)) {
         classForList = mistakeClass;
       }
 
@@ -106,8 +115,9 @@ const GameListContainer = (props) => {
         classForList = rightClass;
       }
         return (
-            <li onClick={func} className={classForList} key={word.name} data-word-object={word.description} data-word-latina={word.species} 
+            <li onClick={func} key={word.name} data-word-object={word.description} data-word-latina={word.species} 
             data-word-number={word.id} data-word-image={word.image} data-word-audio={word.audio}>
+              <span className={classForList}></span>
               {word.name}
             </li>
         );

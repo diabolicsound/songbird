@@ -11,7 +11,7 @@ const Main = (props) => {
   const { func, numChangeFunc, currentBirdName, birdNameTranslate, birdDescription, disabledButton, 
     level, wordCollection, currentBirdImage, topBirdPicture, randomNumber,
     currentBirdAudio, mistakeClass, answerName, allAnswers, rightClass, rightAnswer  } = props;
-  console.log(wordCollection[randomNumber]);
+    console.log(wordCollection[randomNumber]);
 
     return (
         <div>
