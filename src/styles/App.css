@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     width: auto;
-    background-image: url('../utils/img/background-wall-3.jpg');
+    background-image: url('../utils/img/background-wall-4.jpg');
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
 }

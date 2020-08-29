@@ -3,6 +3,8 @@ import React from 'react';
 
 const ModalWindowStyled = styled.div`
 color: white;
+background-color: rgba( 1,0,0,0.8);
+font-family: Helvetica, sans-serif;
 
 h2 {
     margin-left: 45%;
@@ -26,7 +28,7 @@ const ModalWindow = (props) => {
     return (
     <ModalWindowStyled>
         <h2>Поздравляем!</h2>
-        <p>Вы прошли игру. Ваш результат - {points} из 30!</p>
+        <p>Вы прошли викторину. Ваш результат - {points} из 30 возможных!</p>
     <button onClick={resetFunc}>Попробовать еще раз</button></ModalWindowStyled>
     )
 }

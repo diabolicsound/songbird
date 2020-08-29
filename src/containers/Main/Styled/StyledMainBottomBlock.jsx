@@ -10,23 +10,24 @@ const StyledMainBottomBlock = styled.div`
 color: white;
 width: 100%;
 padding-top: 20px;
+font-family: Helvetica, sans-serif;
 
 ul {
-  font-size: 32px;
-  font-family: Helvetica, sans-serif;
+  font-size: 25px;
   color:white;
   width: 475px;
   background-color: rgba( 1, 0, 0, 0.5);
   border-radius: 10px;
   padding-left: 0;
 }
+
 li:hover {
   cursor: pointer;
 }
 
 li {
   list-style-type: none;
-  line-height: 50px;
+  line-height: 43px;
   border: 1px solid black;
 }
 
@@ -56,17 +57,30 @@ span {
   justify-content: space-around;
 }
 
-.answer-block div {
-  background-color: rgba( 1,0,0,0.6);
+  .answer-block div {
   border-radius: 10px;
+  padding-left: 15px;
 }
 
 .bird-description {
   width: 500px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.flex-block {
+  display: flex;
+}
+
+.dark-block {
+  background-color: rgba( 1,0,0,0.6);
 }
 
 img {
-  width: 200px;
+  width: 180px;
+  height: 190px;
+  border-radius: 28%;
+  object-fit: cover;
 }
 `;
 
@@ -82,21 +96,31 @@ const GameListContainer = (props) => {
     const BirdsDescriptionContainer = () => {
       if (!currentBirdAudio) {
         return (
-          <div><h2>{currentBirdName}</h2>
-          <img src={currentBirdImage} />
+          <div className={'dark-block'}>
+            <div>
+            <img src={currentBirdImage} />
+            <div>
+            <h2>{currentBirdName}</h2>
           <p>{birdNameTranslate}</p>
+          </div>
+          </div>
         <p className={'bird-description'}>{birdDescription}</p>
           </div>
         )
       }
     return (
-      <div><h2>{currentBirdName}</h2>
+      <div className={'dark-block'}>
+        <div className={'flex-block'}>
       <img src={currentBirdImage} />
+      <div>
+      <h2>{currentBirdName}</h2>
+      <p>{birdNameTranslate}</p>
       <ReactAudioPlayer 
                 src={currentBirdAudio}
                 controls
                 />
-      <p>{birdNameTranslate}</p>
+      </div>
+      </div>
     <p className={'bird-description'}>{birdDescription}</p>
       </div>
     )
