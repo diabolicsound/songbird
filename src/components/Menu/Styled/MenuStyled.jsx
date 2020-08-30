@@ -25,7 +25,7 @@ margin-right: 15px;
     transition: 1s linear;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1050px) {
     font-size: 19px;
     flex-wrap: wrap;
     overlow: hidden;
