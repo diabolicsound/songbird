@@ -15,6 +15,7 @@ padding-bottom: 5px;
 
 li { 
 padding-left: 15px;
+padding-right: 15px;
 margin-right: 15px;
 }
 }
