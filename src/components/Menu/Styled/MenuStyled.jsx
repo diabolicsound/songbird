@@ -26,9 +26,6 @@ padding-right: 15px;
 
 @media (max-width: 950px) {
     font-size: 21px;
-}
-
-@media (max-width: 880px) {
     flex-wrap: wrap;
     overlow: hidden;
     padding-left: 0;
@@ -37,6 +34,7 @@ padding-right: 15px;
         line-height: 30px;
     }
 }
+
 `;
 
 export default StyledMenu;
