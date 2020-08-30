@@ -139,6 +139,7 @@ img {
 
   .rhap_container {
     width: 200px;
+    margin-right: 15px;
   }
 }
 
