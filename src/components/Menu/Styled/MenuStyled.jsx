@@ -5,13 +5,13 @@ display: flex;
 justify-content: space-around;
 flex-direction: row;
 list-style-type: none;
-background-color: #9b00e3;
+background-color: #00BD3B;
 color: white;
 border-radius: 15px;
 font-size: 22px;
 padding-top: 5px;
 padding-bottom: 5px;
-margin-left: 50px;
+
 
 li { 
 padding-left: 15px;
@@ -20,8 +20,22 @@ padding-right: 15px;
 }
 
 .activeList {
-    background-color: #cb05fc;
+    background-color: #05F750;
     transition: 1s linear;
+}
+
+@media (max-width: 950px) {
+    font-size: 21px;
+}
+
+@media (max-width: 820px) {
+    flex-wrap: wrap;
+    overlow: hidden;
+    padding-left: 0;
+
+    li {
+        line-height: 30px;
+    }
 }
 `;
 

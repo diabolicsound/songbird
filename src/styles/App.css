@@ -5,4 +5,6 @@ body {
     background-image: url('../utils/img/background-wall-4.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    height: fit-content;
+    min-height: 100vh;
 }

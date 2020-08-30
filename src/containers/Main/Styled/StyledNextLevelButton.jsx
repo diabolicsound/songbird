@@ -3,12 +3,19 @@ import React from 'react';
 
 const StyledNextLevelButton = styled.button`
 color: pink;
-width: 80vw;
+width: 100%;
 height: 30px;
-margin-left: 10vw;
-background-color: #9b00e3;
+background-color: #00BD3B;
 border-radius: 7px;
 margin-top: 15px;
+
+ :enabled {
+    background-color: #E25600;
+}
+
+:hover {
+    background-color: #30E290;
+}
 }
 `;
 
