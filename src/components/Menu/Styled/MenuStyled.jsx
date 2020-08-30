@@ -25,7 +25,7 @@ padding-right: 15px;
 }
 
 @media (max-width: 950px) {
-    font-size: 21px;
+    font-size: 19px;
     flex-wrap: wrap;
     overlow: hidden;
     padding-left: 0;
