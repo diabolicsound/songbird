@@ -28,7 +28,7 @@ padding-right: 15px;
     font-size: 21px;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 880px) {
     flex-wrap: wrap;
     overlow: hidden;
     padding-left: 0;
