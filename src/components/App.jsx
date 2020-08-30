@@ -30,7 +30,6 @@ function randomAnswerNumber() {
   const [birdPicture, changeBirdPicture] = useState(bird);
   const [mistakeClass, changeMistakeClass] = useState('');
   const [rightClass, changeRightClass] = useState('');
-  const [currentTarget, changeCurrentTarget] = useState('none');
   const [clickedAnswer, changeClickedAnswer] = useState('lol');
   const [allAnswers, changeAllAnswers] = useState([]);
   const [randomNum, changeNum] = useState(randomNumber);
@@ -47,11 +46,8 @@ function randomAnswerNumber() {
       const result = await url.json();
       changeCurrentBird(name);
       changeCurrentBirdLatina(latina);
-      console.log('promiseLoaded');
       return result.recordings[0].file;
     }
-
-
 
   const [playRight] = useSound(
     correct,
@@ -75,12 +71,10 @@ function randomAnswerNumber() {
         playRight();
         changeTotalScore(totalScore + scoreForLevel);
         changeBirdPicture(await imageRequest(event.target));
-        console.log('DA');
         changeRightClass('clicked-right');
         changeAnswer(false);
         changeClickedAnswer(event.target.textContent) 
       }
-      console.log(document.getElementById('audioPlayer'))
         await changeBirdAudio(await audioRequest(event.target, event.target.textContent, event.target.dataset.wordLatina));
         changeCurrentBirdDescription(event.target.dataset.wordObject);
         await changeBirdImage(await imageRequest(event.target));

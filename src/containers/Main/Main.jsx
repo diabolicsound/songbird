@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import MainBlockTop from '../../containers/Main/Styled/StyledMainTopBlock';
 import MainBlockBottom  from '../../containers/Main/Styled/StyledMainBottomBlock';
-import NextLevelButton from '../../containers/Main/Styled/StyledNextLevelButton';
-import birdsData from '../../components/birdsData';
-import shuffleArray from '../../utils/shuffleArray';
-import bird from '../../utils/img/bird.jpg';
 
 const StyledDiv = styled.div`
 width: 80%;
